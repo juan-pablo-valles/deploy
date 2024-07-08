@@ -18,14 +18,15 @@
     </style>
 </head>
 <body>
-    <h1>Disponibles</h1>
+    <h1>Disponibles a la venta</h1>
     <section id="autos">
 
     </section>
 
     <script>
-        const apiUrl = 'http://localhost:3000';
-        fetch(`${apiUrl}/productos`)
+       <!-- const apiUrl = 'http://localhost:3000';-->
+          <!--  fetch(`${apiUrl}/productos`) -->
+		fetch(`/productos`)
            .then(response => response.json())
             .then(data => {
                 const autos = data;
@@ -35,16 +36,13 @@
                 autos.forEach(autos => {
                     const autoElement = document.createElement('div');
                     autoElement.innerHTML = `
-                        <h2>${autos.descripcion}</h2>
-                        <p>${autos.descripcion}</p>
+                        <h2>${autos.marca} ${autos.modelo}</h2>
+                        <p>Año: ${autos.año}</p>
                         <ul>
-                            <li>Id: ${autos.id_marca}</li>
-                            <li>Stock: ${autos.id_modelo}</li>
-                            <li>Categoría: ${autos.año}</li>
-                            <li>Banco: ${autos.precio} - Descuento: ${autos.kilometraje}</li>
-                            <li>Cuotas: ${autos.precio}</li>
+                            <li>Kilometraje: ${autos.kilometraje}</li>
+                            <li>Descripción: ${autos.descripcion}</li>
                         </ul>
-                        <strong>$ ${autos.precio}</strong>
+                        <strong>Precio: $ ${autos.precio}</strong>
                         
                     `;
                     autosContainer.appendChild(autoElement);

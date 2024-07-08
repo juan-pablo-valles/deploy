@@ -12,7 +12,7 @@ const puerto = process.env.PORT || 3000;
 // Enable JSON parsing for request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static('public')); // dentro del directorio public los html estáticos
 
 // Read all resources
 app.get('/productos', async (req, res) => {

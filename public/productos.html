@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #autos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        #autos div {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Disponibles</h1>
+    <section id="autos">
+
+    </section>
+
+    <script>
+        const apiUrl = 'http://localhost:3000';
+        fetch(`${apiUrl}/productos`)
+           .then(response => response.json())
+            .then(data => {
+                const autos = data;
+                console.log(autos)
+                const autosContainer = document.querySelector('#autos');
+
+                autos.forEach(autos => {
+                    const autoElement = document.createElement('div');
+                    autoElement.innerHTML = `
+                        <h2>${autos.descripcion}</h2>
+                        <p>${autos.descripcion}</p>
+                        <ul>
+                            <li>Id: ${autos.id_marca}</li>
+                            <li>Stock: ${autos.id_modelo}</li>
+                            <li>Categoría: ${autos.año}</li>
+                            <li>Banco: ${autos.precio} - Descuento: ${autos.kilometraje}</li>
+                            <li>Cuotas: ${autos.precio}</li>
+                        </ul>
+                        <strong>$ ${autos.precio}</strong>
+                        
+                    `;
+                    autosContainer.appendChild(autoElement);
+                });
+            });
+    </script>
+</body>
+</html>

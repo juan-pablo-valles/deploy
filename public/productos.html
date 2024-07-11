@@ -24,9 +24,7 @@
     </section>
 
     <script>
-       <!-- const apiUrl = 'http://localhost:3000';-->
-          <!--  fetch(`${apiUrl}/productos`) -->
-		fetch(`/productos`)
+      	fetch(`/productos`)
            .then(response => response.json())
             .then(data => {
                 const autos = data;

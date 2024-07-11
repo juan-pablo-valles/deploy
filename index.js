@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public')); // dentro del directorio public los html estáticos
 
-// Read all resources
+// GET de todos los autos para html
 app.get('/productos', async (req, res) => {
     const sql = `SELECT 
                 marcas.nombre AS marca,
@@ -39,7 +39,7 @@ app.get('/productos', async (req, res) => {
 
 });
 
-// Read a specific resource
+// GET de un auto por id
 app.get('/productos/:id', async (req, res) => {
     const id = req.params.id;
     const sql = `SELECT 
@@ -65,7 +65,23 @@ app.get('/productos/:id', async (req, res) => {
     }
 });
 
-// Create a new resource
+// GET de tabla autos todos
+app.get('/autos', async (req, res) => {
+    const sql = `SELECT * FROM autos
+                ORDER by id DESC`;
+    try {
+        const connection = await pool.getConnection()
+        const [rows] = await connection.query(sql);
+        connection.release();
+        res.json(rows);
+
+    } catch (error) {
+        res.send(500).send('Internal server error')
+    }
+
+});
+
+// Inserta un auto en tabla
 app.post('/productos', async (req, res) => {
 
     const auto = req.body;
@@ -84,7 +100,7 @@ app.post('/productos', async (req, res) => {
     }
 });
 
-// Update a specific resource
+// Actualiza un auto por id en tabla
 app.put('/productos/:id', async (req, res) => {
     const id = req.params.id;
     const auto = req.body;
@@ -105,7 +121,7 @@ app.put('/productos/:id', async (req, res) => {
 
 });
 
-// Delete a specific resource
+// Elimina un auto de tabla por id
 app.delete('/productos/:id', async (req, res) => {
     const id = req.params.id;
     const sql = `DELETE FROM autos WHERE id = ?`;

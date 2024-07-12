@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Productos - CaC Usados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        header h1 a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .menu-hamburguesa {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-hamburguesa div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 4px 0;
+        }
+        nav {
+            display: none;
+            flex-direction: column;
+            background-color: #333;
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            width: 150px;
+            text-align: right;
+        }
+        nav a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #444;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .producto {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .producto img {
+            width: 100px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+        .producto .descripcion {
+            flex: 1;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (min-width: 600px) {
+            header nav {
+                display: flex;
+                flex-direction: row;
+                position: static;
+                width: auto;
+                text-align: left;
+            }
+            .menu-hamburguesa {
+                display: none;
+            }
+        }
+        @media (max-width: 599px) {
+            .menu-hamburguesa {
+                display: flex;
+            }
+            header nav.show {
+                display: flex;
+            }
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            document.querySelector('header nav').classList.toggle('show');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1><a href="#home">CaC Usados</a></h1>
+        <div class="menu-hamburguesa" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#usuarios">Usuario</a>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+            
+        </nav>
+    </header>
+    <div class="container">
+        <h2>CaC Usados - Parque Industrial </h2>
+        <div class="producto">
+            <img src="https://www.megautos.com/wp-content/uploads/2016/12/Hyundai-concesionario-Busan-0.jpg" alt="Auto">
+            <div class="descripcion">
+                <h3>Juan Carlos Silva</h3>
+                <p>Vendedor - Sector Usados</p>
+                <p class="contact">📧 juancarlos@cac-usados.com</p>
+                <p class="contact">📞 +123 456 7890</p>
+            </div>
+        </div>
+        <!-- Repetir este bloque para cada auto -->
+    </div>
+    <footer>
+        <p>&copy; 2024 CaC Usados - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

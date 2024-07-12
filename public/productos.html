@@ -1,22 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Autos Disponibles</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
         #autos {
+            max-width: 1000px;
+            margin: 20px auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
         #autos div {
+            background-color: white;
             border: 1px solid #ccc;
+            border-radius: 8px;
             padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #autos div h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        #autos div p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        #autos div ul {
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        #autos div ul li {
+            list-style-type: none;
+            margin-bottom: 5px;
+        }
+
+        #autos div strong {
+            display: block;
+            font-size: 1.2rem;
+            color: #4CAF50;
         }
     </style>
 </head>
+
 <body>
     <h1>Disponibles a la venta</h1>
     <section id="autos">
@@ -24,28 +72,29 @@
     </section>
 
     <script>
-      	fetch(`/productos`)
-           .then(response => response.json())
+        fetch(`/productos`)
+            .then(response => response.json())
             .then(data => {
-                const autos = data;
-                console.log(autos)
                 const autosContainer = document.querySelector('#autos');
-
-                autos.forEach(autos => {
+                autosContainer.innerHTML = ''; // Limpiar contenido existente
+                data.forEach(auto => {
                     const autoElement = document.createElement('div');
                     autoElement.innerHTML = `
-                        <h2>${autos.marca} ${autos.modelo}</h2>
-                        <p>Año: ${autos.año}</p>
+                        <h2>${auto.marca} ${auto.modelo}</h2>
+                        <p>Año: ${auto.año}</p>
                         <ul>
-                            <li>Kilometraje: ${autos.kilometraje}</li>
-                            <li>Descripción: ${autos.descripcion}</li>
+                            <li>Kilometraje: ${auto.kilometraje}</li>
+                            <li>Descripción: ${auto.descripcion}</li>
                         </ul>
-                        <strong>Precio: $ ${autos.precio}</strong>
-                        
+                        <strong>Precio: $${auto.precio}</strong>
                     `;
                     autosContainer.appendChild(autoElement);
                 });
+            })
+            .catch(error => {
+                console.error('Error fetching autos:', error);
             });
     </script>
 </body>
+
 </html>

@@ -22,7 +22,8 @@ app.get('/productos', async (req, res) => {
                 autos.año, 
                 autos.kilometraje,
                 autos.precio,
-                autos.descripcion
+                autos.descripcion,
+                autos.imagen_url
                 FROM autos 
                 JOIN marcas ON marcas.id = autos.id_marca
                 JOIN modelos ON modelos.id = autos.id_modelo
